@@ -72,7 +72,7 @@
     "eth-gas-reporter": "^0.1.12",
     "ethereumjs-util": "^6.0.0",
     "ethers": "^4.0.13",
-    "ganache-cli": "^6.2.4-beta.2",
+    "ganache-cli": "^6.2.4",
     "husky": "^1.2.0",
     "istanbul": "^0.4.5",
     "jsonfile": "^5.0.0",
