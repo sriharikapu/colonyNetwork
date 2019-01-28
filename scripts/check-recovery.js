@@ -53,7 +53,7 @@ walkSync("./contracts/").forEach(contractName => {
       "contracts/ReputationMiningCycle.sol",
       "contracts/ReputationMiningCycleRespond.sol",
       "contracts/Resolver.sol",
-      "contracts/SafeMath.sol",
+      "contracts/SafeIntMath.sol",
       "contracts/TokenLocking.sol",
       "contracts/TokenLockingStorage.sol",
       "contracts/Token.sol", // Imported from colonyToken repo

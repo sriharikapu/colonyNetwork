@@ -1,7 +1,7 @@
 /* globals artifacts */
 /* eslint-disable no-undef, no-console */
 
-const SafeMath = artifacts.require("./SafeMath");
+const SafeIntMath = artifacts.require("./SafeIntMath");
 const ContractRecovery = artifacts.require("./ContractRecovery");
 const ColonyTask = artifacts.require("./ColonyTask");
 const ColonyNetwork = artifacts.require("./ColonyNetwork");
@@ -22,8 +22,8 @@ artifacts.require("./ReputationMiningCycle");
 
 module.exports = (deployer, network) => {
   console.log(`## ${network} network ##`);
-  deployer.deploy(SafeMath);
-  deployer.link(SafeMath, ColonyTask);
+  deployer.deploy(SafeIntMath);
+  deployer.link(SafeIntMath, ColonyTask);
   deployer.deploy(ColonyTask);
   deployer.deploy(ColonyNetwork);
   deployer.deploy(ColonyNetworkMining);

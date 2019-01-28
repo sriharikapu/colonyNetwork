@@ -18,7 +18,7 @@
 pragma solidity >=0.4.23;
 
 
-library SafeMath {
+library SafeIntMath {
   int256 constant MIN_INT256 = -(2**255);
 
   function safeToAddInt(int a, int b) public pure returns (bool) {
