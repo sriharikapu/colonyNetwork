@@ -235,20 +235,15 @@ contract IColonyNetwork is ColonyNetworkDataTypes, IRecovery {
   /// @param orbitdb The path of the orbitDB database associated with the colony name
   function registerColonyLabel(string memory colonyName, string memory orbitdb) public;
 
-  /// @notice Retrieve the orbitdb address corresponding to a registered account
-  /// @param node The Namehash of the account being queried.
-  /// @return orbitDB A string containing the address of the orbit database
-  function getProfileDBAddress(bytes32 node) public view returns (string memory orbitDB);
-
   /// @notice Reverse lookup a username from an address.
   /// @param addr The address we wish to find the corresponding ENS domain for (if any)
   /// @return domain A string containing the colony-based ENS name corresponding to addr
   function lookupRegisteredENSDomain(address addr) public view returns(string memory domain);
 
-  /// @notice Returns the address the supplied node resolves do, if we are the resolver
+  /// @notice Returns the ENS record the supplied node resolves do, if we are the resolver
   /// @param node The namehash of the ENS address being requested
-  /// @return address The address the supplied node resolves to
-  function addr(bytes32 node) public view returns (address);
+  /// @return ensRecord The ENSRecord the supplied node resolves to
+  function lookupRegisteredENSRecord(bytes32 node) public view returns (ENSRecord ensRecord);
 
   /// @notice Returns the address of the ENSRegistrar for the Network
   /// @return address The address the ENSRegistrar resolves to

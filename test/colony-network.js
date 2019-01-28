@@ -283,18 +283,16 @@ contract("Colony Network", accounts => {
       const resolverAddress = await ensRegistry.resolver(hash);
       assert.equal(resolverAddress, colonyNetwork.address);
       // Then query the resolver
-      const resolvedAddress = await colonyNetwork.addr(hash);
-      assert.equal(resolvedAddress, accounts[1]);
+      const record = await colonyNetwork.lookupRegisteredENSRecord(hash);
+      assert.equal(record.addr, accounts[1]);
+      assert.equal(record.orbitdb, orbitDBAddress);
+
       const owner = await ensRegistry.owner(hash);
       assert.equal(owner, colonyNetwork.address);
 
       // Check reverse lookup
       const lookedUpENSDomain = await colonyNetwork.lookupRegisteredENSDomain(accounts[1]);
       assert.equal(lookedUpENSDomain, "test.user.joincolony.eth");
-
-      // Get stored orbitdb address
-      const retrievedOrbitDB = await colonyNetwork.getProfileDBAddress(hash);
-      assert.equal(retrievedOrbitDB, orbitDBAddress);
 
       // Label already in use
       await checkErrorRevert(colonyNetwork.registerUserLabel(username, orbitDBAddress, { from: accounts[2] }), "colony-label-already-owned");
@@ -326,15 +324,13 @@ contract("Colony Network", accounts => {
       const resolverAddress = await ensRegistry.resolver(hash);
       assert.equal(resolverAddress, colonyNetwork.address);
       // Then query the resolver
-      const resolvedAddress = await colonyNetwork.addr(hash);
-      assert.equal(resolvedAddress, colony.address);
+      const record = await colonyNetwork.lookupRegisteredENSRecord(hash);
+      assert.equal(record.addr, colony.address);
+      assert.equal(record.orbitdb, orbitDBAddress);
 
       // Check reverse lookup
       const lookedUpENSDomain = await colonyNetwork.lookupRegisteredENSDomain(colony.address);
       assert.equal(lookedUpENSDomain, "test.colony.joincolony.eth");
-      // Get stored orbitdb address
-      const retrievedOrbitDB = await colonyNetwork.getProfileDBAddress(hash);
-      assert.equal(retrievedOrbitDB, orbitDBAddress);
 
       // Can't register two labels for a colony
       await checkErrorRevert(colony.registerColonyLabel(colonyName2, orbitDBAddress, { from: accounts[0] }), "colony-already-labeled");

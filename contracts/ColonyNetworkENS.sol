@@ -16,6 +16,7 @@
 */
 
 pragma solidity >=0.4.23;
+pragma experimental "ABIEncoderV2";
 
 import "./ens/ENS.sol";
 import "./ColonyNetworkStorage.sol";
@@ -90,10 +91,6 @@ contract ColonyNetworkENS is ColonyNetworkStorage {
     emit ColonyLabelRegistered(msg.sender, subnode);
   }
 
-  function getProfileDBAddress(bytes32 node) public view returns (string memory orbitDB) {
-    return records[node].orbitdb;
-  }
-
   function lookupRegisteredENSDomain(address addr) public view returns(string memory domain) {
     if (bytes(userLabels[addr]).length != 0) {
       return string(abi.encodePacked(userLabels[addr], ".user.joincolony.eth"));
@@ -104,8 +101,8 @@ contract ColonyNetworkENS is ColonyNetworkStorage {
     }
   }
 
-  function addr(bytes32 node) public view returns (address) {
-    return records[node].addr;
+  function lookupRegisteredENSRecord(bytes32 node) public view returns (ENSRecord) {
+    return records[node];
   }
 
   function getENSRegistrar() public view returns (address) {
